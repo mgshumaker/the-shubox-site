@@ -1,45 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matthew Shumaker</title>
-    <style>
-        body {
-            background-color: darkslategray;
-            color: white;
-            font-family: Helvetica, sans-serif;
-        }
-        a {
-            color: lightgreen;
-            text-decoration: underline;
-        }
-        a:hover {
-            color: lightseagreen;
-            text-decoration: underline;
-        }
-        a:visited {
-            color: cadetblue;
-            text-decoration: underline;
-        }
-    </style>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Matthew Shumaker — student at Notre Dame studying Finance, Computing & Digital Technologies, and Philosophy.">
+  <title>Matthew Shumaker</title>
+  <style>
+    :root {
+      --bg: #151515;
+ 
+      --text: #e8eaed;
+      --text-muted: #9aa0a6;
+      --accent: #5ec4b6;
+      --accent-hover: #7dd8cc;
+      --border: #2a2f3a;
+      --max-width: 42rem;
+      --line-height: 1.6;
+    }
 
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: var(--line-height);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    /* Carousel header */
+    .carousel {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      height: 1.2em;
+      line-height: 1.2;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .carousel-track {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .carousel-line {
+      margin: 0;
+      flex-shrink: 0;
+      height: 1.2em;
+      line-height: 1.2;
+      font-size: 1em;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-line:first-child {
+        display: none;
+      }
+
+      .carousel-track {
+        transform: translateY(0);
+      }
+    }
+
+    .tagline {
+      margin: 0 0 2rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Primary nav links */
+    nav.primary {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav.primary a {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    nav.primary .nav-sep {
+      margin: 0 0.75rem;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    /* Content sections */
+    main section {
+      margin-bottom: 2.5rem;
+    }
+
+    main section:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      margin: 0 0 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-note {
+      margin: -0.25rem 0 1rem;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .project-category {
+      margin: 2rem 0 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
+
+    .project-category:first-of-type {
+      margin-top: 1.25rem;
+    }
+
+    .password-line {
+      margin-top: -0.25rem;
+    }
+
+    .password-field {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .password-box {
+      display: inline-block;
+      min-width: 5.5rem;
+      padding: 0.1rem 0.45rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85rem;
+      color: var(--text);
+      cursor: default;
+      vertical-align: baseline;
+    }
+
+    .password-box .pw-text {
+      display: none;
+    }
+
+    .password-box:hover .pw-mask,
+    .password-box:focus .pw-mask {
+      display: none;
+    }
+
+    .password-box:hover .pw-text,
+    .password-box:focus .pw-text {
+      display: inline;
+    }
+
+    .see-below {
+      font-size: 0.75rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 3rem 1.25rem 2.5rem;
+      }
+    }
+  </style>
+</head>
 <body>
-<center>
-<h1>Hello! </h1>
-<p>
-    Welcome to my website. I am Matthew Shumaker
-    <br> <br>
-    I am a student at the University of Notre Dame studying Finance, Computing & Digital Technologies, and Philosophy.
-    <br><br>
-    This summer, I'm working at a firm called <i>Thesis Driven</i>, which is a real estate capital markets firm that leverages media to inform investors about the industry.
-</p>
-<br>
-<b>Favorite Articles</b>
-<p><i>(In no particular order)</i></p>
-<a href="https://www.documentjournal.com/2021/08/rediscovering-desire-in-a-panopticon-of-virtual-pleasures/">Rediscovering desire in a panopticon of virtual pleasures</a> by Dean Kissick
-<br>
-<a href="https://www.nytimes.com/2023/02/03/style/modern-love-two-kisses-we-never-talked-about.html">Two Kisses We Never Talked About</a> by Alessandra Ranelli
-</center>
+  <div class="page">
+    <header>
+      <div class="carousel" aria-label="Site title">
+        <div class="carousel-track">
+          <p class="carousel-line">Welcome to the Shubox</p>
+          <p class="carousel-line">Matthew Shumaker</p>
+        </div>
+      </div>
+      <p class="tagline">Student at Notre Dame — Finance, Computing &amp; Digital Technologies, and Philosophy</p>
+      <nav class="primary" aria-label="Primary links">
+        <a href="https://github.com/mgshumaker/">GitHub</a>
+        <span class="nav-sep" aria-hidden="true">•</span>
+        <a href="mailto:matthewshu22@gmail.com">Email</a>
+        <span class="nav-sep" aria-hidden="true">•</span>
+        <a href="https://www.linkedin.com/in/matthewgshumaker/">LinkedIn</a>
+        <span class="nav-sep" aria-hidden="true">•</span>
+        <a href="https://www.goodreads.com/user/show/163581426">Goodreads</a>
+        <span class="nav-sep" aria-hidden="true">•</span>
+        <a href="https://letterboxd.com/matthewshumaker/">Letterboxd</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>About</h2>
+        <p>
+        I'm Matthew Shumaker, a student at the University of Notre Dame
+          studying Finance, Computing &amp; Digital Technologies, and Philosophy.
+        </p>
+      </section>
+
+      <section id="work">
+        <h2>Current Work</h2>
+        <p>
+          This summer, I'm working at a firm called <em>Thesis Driven</em>, a real estate capital
+          markets firm that leverages media to inform investors about the industry.
+        </p>
+      </section>
+
+      <section id="currently-reading">
+        <h2>Reading</h2>
+        <p>
+          I'm currently reading <a href="https://www.goodreads.com/book/show/72485.Dracula"><em>Dracula</em></a> by Bram Stoker, and I just finished reading <a href="https://www.goodreads.com/book/show/198123554-kitchen-confidential-annotated-edition"><em>Kitchen Confidential</em></a> by Anthony Bourdain.
+        </p>
+      </section>
+
+      <section id="favorites">
+        <h2>Favorites</h2>
+        <p>
+          My favorite book of all time is
+          <a href="https://www.goodreads.com/book/show/86147.Bright_Lights_Big_City"><em>Bright Lights, Big City</em></a>
+          by Jay McInerney. My favorite classic has got to be
+          <a href="https://www.goodreads.com/book/show/5107.The_Catcher_in_the_Rye"><em>The Catcher in the Rye</em></a>.
+          I have an extensive list of favorite movies that I list
+          <a href="https://letterboxd.com/matthewshumaker/list/shumaker-in-a-nutshell/">on Letterboxd</a>.
+          <!-- and some of my favorite web articles are
+          <a href="https://www.documentjournal.com/2021/08/rediscovering-desire-in-a-panopticon-of-virtual-pleasures/">Rediscovering desire in a panopticon of virtual pleasures</a>
+          by Dean Kissick and
+          <a href="https://www.nytimes.com/2023/02/03/style/modern-love-two-kisses-we-never-talked-about.html">Two Kisses We Never Talked About</a>
+          by Alessandra Ranelli. -->
+        </p>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+
+        <h3 class="project-category">Video Games</h3>
+        <p>
+          <a href="https://megathedog.itch.io/staying-afloat">Staying Afloat</a>, a game where you dive underwater to collect fish to prepare and sell at your restaurant!
+          <em>Game is buggy.</em>
+        </p>
+        <p class="project-note">
+          Winner of the Best Replayability, Highest Fun Factor, and Most Addictive awards, as voted by my classmates.
+        </p>
+        <p>
+          <a href="https://megathedog.itch.io/lethal-parlay">Lethal Parlay</a>, a game where you take bets to complete shooter levels using the mysterious Lethal Parlay website.
+          <em>This game is unfinished and buggy, but is still playable. Use the password to gain access to the game's download page.</em>
+        </p>
+        <p class="project-note">
+          The class didn't vote on awards for this game, but I did get an A on that class, so that's something!
+        </p>
+        <p class="password-line">
+          <span class="password-field">
+            password:
+            <span class="password-box" tabindex="0" title="Hover to reveal">
+              <span class="pw-mask">········</span>
+              <span class="pw-text">website</span>
+            </span>
+          </span>
+        </p>
+
+        <h3 class="project-category">Short Films</h3>
+        <p>
+          • <a href="https://youtu.be/PhpPayvK2BU">Gullard</a>, a short film inspired by my one act play, <em>Rat Patrol</em> <span class="see-below">(see below)</span>.
+        </p>
+        <p>
+          • <a href="https://youtu.be/zf9_Ivia2nI">Willis</a>, a short film where a struggling actor discovers what had been holding him back all along.
+        </p>
+
+        <h3 class="project-category">Other</h3>
+        <p>
+          <a href="https://youtu.be/hZjSFbGh_Rs">Rat Patrol: A New One Act</a>, a one act play about the Northwest Old Hartford's Police Depa<i>rat</i>ment's Rat Patrol.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <small>&copy; 2026 Matthew Shumaker</small>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      var carousel = document.querySelector(".carousel");
+      var track = document.querySelector(".carousel-track");
+      if (!carousel || !track) return;
+
+      var showingWelcome = true;
+      var timer;
+
+      function showWelcome() {
+        track.style.transform = "translateY(0)";
+        showingWelcome = true;
+      }
+
+      function showName() {
+        track.style.transform = "translateY(-50%)";
+        showingWelcome = false;
+      }
+
+      function startAutoRotate() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          if (showingWelcome) showName();
+          else showWelcome();
+        }, 4000);
+      }
+
+      showWelcome();
+      startAutoRotate();
+
+      carousel.addEventListener("mouseenter", function () {
+        clearInterval(timer);
+        showWelcome();
+      });
+
+      carousel.addEventListener("mouseleave", function () {
+        showName();
+        startAutoRotate();
+      });
+    })();
+  </script>
+</body>
+</html>
